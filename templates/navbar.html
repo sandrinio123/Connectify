@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-lg custom-navbar px-2">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 fw-bold mx-1">
+            <li class="nav-item mx-1">
+                <img src="/static/logo/logo.png" alt="Image Description" style="width: 40px; height: 40px;">
+            </li>
+            <li class="nav-item mx-1">
+                <a class="nav-link {% if request.endpoint == 'home' %} active {% endif %}" href="{{ url_for('home') }}">Blogs</a>
+            </li>
+            <li class="nav-item mx-1">
+                <a class="nav-link {% if request.endpoint == 'create_post' %} active {% endif %}" href="{{ url_for('create_post') }}">Create Post</a>
+            </li>
+            <li class="nav-item mx-1">
+                <a class="nav-link {% if request.endpoint == 'profiles' %} active {% endif %}" href="{{ url_for('profiles') }}">Profiles</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 fw-bold mx-1 align-items-center">
+            {% if current_user.is_authenticated %}
+            <li class="nav-item mx-1"> 
+                <a class="nav-link {% if request.endpoint == 'login' %} active {% endif %}" href="{{ url_for('logout') }}">Logout</a>
+            </li>
+            <li class="nav-item mx-1">
+                <img src="{{ url_for('static', filename='uploads/' + (current_user.img if current_user.img else 'default.jpg')) }}"
+                     alt="Profile Picture" 
+                     class="rounded-circle" 
+                     style="width: 40px; height: 40px; object-fit: cover; margin-right: 10px;">
+            </li>
+            {% else %}
+            <li class="nav-item mx-1"> 
+                <a class="nav-link {% if request.endpoint == 'login' %} active {% endif %}" href="{{ url_for('login') }}">Login</a>
+            </li>
+            <li class="nav-item mx-1">
+                <a class="nav-link {% if request.endpoint == 'register' %} active {% endif %}" href="{{ url_for('register') }}">Register</a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>

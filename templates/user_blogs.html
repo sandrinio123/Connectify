@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<img src="{{ url_for('static', filename='uploads/' + user.img) }}" 
+                     alt="Profile Picture" 
+                     class="rounded-circle" 
+                     style="width: 80px; height: 80px; object-fit: cover; margin-right: 10px;">
+<h1>{{ user.name }} {{ user.surname }}</h1>
+
+<div class="box">
+    <h2>Blogs</h2>
+    <div class="blog-container" style="justify-content: center;">
+        {% if blogs %}
+        {% for blog in blogs %}
+        <div class="col-lg-4 col-md-6 d-flex mb-4 mt-4">
+            <div class="post-card d-flex flex-column">
+                <div class="post-content d-flex flex-column">
+                    <img src="{{ url_for('static', filename='uploads/' + (user.img if user.img else 'default.jpg')) }}" class="image-on-top" alt="Profile Picture">
+                    <div class="text d-flex flex-column flex-grow-1"> 
+                        <div class="post-title">{{ blog.title }}</div>
+                        <p class="description">{{ blog.description }}</p>
+                        <a href="/blogs/{{ blog.id }}" class="read-more">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <h6><br>No Blogs To Show</h6>
+        {% endif %}    
+    </div>
+</div>
+
+{% endblock %}

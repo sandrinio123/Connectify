@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="blog-contents">
+    <div class="blog-author">
+        {% set user = users[blog.user_id] %}
+        <img src="{{ url_for('static', filename='uploads/' + (user.img if user.img else 'default.jpg')) }}" alt="Profile Picture">
+        <div>
+            <h4>{{ blog.author }}</h4>
+            <h5>{{ blog.title }}</h5>
+        </div>
+    </div>
+    <div class="blog-content-text">
+        <p>{{ blog.content }}</p>
+    </div>
+</div>
+{% endblock %}

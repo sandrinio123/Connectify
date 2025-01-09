@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="py-3">Profiles</h2>
+<div class="profiles-container">
+    {% for user in users %}
+    <div class="profiles">
+        <div class="profile-card">
+            <img src="{{ url_for('static', filename='uploads/' + (user.img if user.img else 'default.jpg')) }}" alt="Profile Picture" class="profile-picture">
+            <div class="text">
+                <div class="profile-name">{{ user.name }} {{ user.surname }}</div>
+                <a href="/users/{{user.id}}" class="see-more">See More</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+

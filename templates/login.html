@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="py-3">Login</h2>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+        {{ form.username(class="form-control", placeholder="Enter your username") }}
+    </div>
+    <div class="mb-3">
+        {{ form.password(class="form-control", placeholder="Enter your password") }}
+    </div>
+    <button type="submit" class="btn btn-primary">{{ form.login.label }}</button>
+</form>
+{% if form.errors %}
+<div style="color: red; margin-bottom: 10px; margin-top: 30px;">
+    <ul>
+        {% for field, errors in form.errors.items() %}
+            {% for error in errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+{% for msg in get_flashed_messages() %}
+    <li>{{msg}}</li>
+{% endfor %}
+{% endblock %}
+
